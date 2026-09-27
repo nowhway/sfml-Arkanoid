@@ -4,5 +4,5 @@
 class ICollide {
 public:
   virtual ~ICollide() = default;
-  virtual std::unique_ptr<Collider> GetCollider() = 0;
+  virtual std::unique_ptr<Collider>* GetCollider() = 0;
 };

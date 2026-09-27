@@ -1,4 +1,5 @@
 #include "Ball.hpp"
+#include "Collider.hpp"
 #include "GameObject.hpp"
 #include "Platform.hpp"
 #include <SFML/Graphics.hpp>
@@ -17,10 +18,10 @@ sf::Time deltaTime;
 
 int main() {
   // building platform sprite
-
+  RectangleCollider platformCollider{};
   const sf::Texture texture_platform("assets/textures/platform.png");
   std::unique_ptr<GameObject> platform_ptr = std::make_unique<Platform>(
-      texture_platform, 100.0f, (sf::Vector2f){3.0f, 3.0f});
+      texture_platform, 100.0f, (sf::Vector2f){3.0f, 3.0f}, platformCollider;
 
   const sf::Texture texture_ball("assets/textures/kula.png");
   std::unique_ptr<GameObject> ball_ptr = std::make_unique<Ball>(texture_ball);

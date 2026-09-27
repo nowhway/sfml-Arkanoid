@@ -1,15 +1,23 @@
 #include "Platform.hpp"
+#include "Collider.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
+#include <memory>
 
 Platform::Platform(const sf::Texture &texture, float moveSpeed,
-                   sf::Vector2f scaleVector)
+                   sf::Vector2f scaleVector, RectangleCollider &rectCollider)
     : sprite(texture) {
   sprite.setPosition({300, 350});
   sprite.scale(scaleVector);
   this->moveSpeed = moveSpeed;
+  this->collider = std::make_unique<RectangleCollider>(
+      rectCollider.GetBounds(),rectCollider.GetOffset());
+}
+
+std::unique_ptr<Collider>* Platform::GetCollider() {
+  return &collider;
 }
 
 void Platform::Update(float deltaTime) {

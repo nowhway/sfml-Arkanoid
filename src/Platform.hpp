@@ -16,8 +16,8 @@ private:
 
 public:
   Platform(const sf::Texture &texture, float moveSpeed,
-           sf::Vector2f scaleVector);
-  std::unique_ptr<Collider> GetCollider() override;
+           sf::Vector2f scaleVector, RectangleCollider& rectCollider);
+  std::unique_ptr<Collider>* GetCollider() override;
   void Update(float deltaTime) override;
   void Draw(sf::RenderWindow &window) override;
 };
