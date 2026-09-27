@@ -10,5 +10,6 @@ private:
 
 public:
   void Update(float deltaTime) override;
+  sf::Vector2f getPosition() override;
   void Draw(sf::RenderWindow &window) override;
 }

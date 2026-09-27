@@ -18,18 +18,18 @@ sf::Time deltaTime;
 
 int main() {
   // building platform sprite
-  RectangleCollider platformCollider{};
   const sf::Texture texture_platform("assets/textures/platform.png");
   std::unique_ptr<GameObject> platform_ptr = std::make_unique<Platform>(
-      texture_platform, 100.0f, (sf::Vector2f){3.0f, 3.0f}, platformCollider;
+      texture_platform, 100.0f, (sf::Vector2f){3.0f, 3.0f},
+      RectangleCollider({3.0f, 3.0f}, {}));
 
   const sf::Texture texture_ball("assets/textures/kula.png");
-  std::unique_ptr<GameObject> ball_ptr = std::make_unique<Ball>(texture_ball);
+  std::unique_ptr<GameObject> ball_ptr =
+      std::make_unique<Ball>(texture_ball, CircleCollider(3.0, {}));
 
   sf::RenderWindow window(sf::VideoMode({800, 800}), "SFML works!");
   // sf::CircleShape shape(100.f);
   // shape.setFillColor(sf::Color::Green);
-
   sf::Clock deltaClock;
   activeGameObjects.push_back(std::move(ball_ptr));
   activeGameObjects.push_back(std::move(platform_ptr));

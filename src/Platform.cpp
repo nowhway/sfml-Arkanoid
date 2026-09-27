@@ -7,18 +7,18 @@
 #include <memory>
 
 Platform::Platform(const sf::Texture &texture, float moveSpeed,
-                   sf::Vector2f scaleVector, RectangleCollider &rectCollider)
+                   sf::Vector2f scaleVector, RectangleCollider rectCollider)
     : sprite(texture) {
   sprite.setPosition({300, 350});
   sprite.scale(scaleVector);
   this->moveSpeed = moveSpeed;
   this->collider = std::make_unique<RectangleCollider>(
-      rectCollider.GetBounds(),rectCollider.GetOffset());
+      rectCollider.GetBounds(), rectCollider.GetOffset());
 }
 
-std::unique_ptr<Collider>* Platform::GetCollider() {
-  return &collider;
-}
+sf::Vector2f Platform::getPosition() { return sprite.getPosition(); }
+
+std::unique_ptr<Collider> *Platform::GetCollider() { return &collider; }
 
 void Platform::Update(float deltaTime) {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))

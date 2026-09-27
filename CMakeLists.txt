@@ -15,7 +15,7 @@ FetchContent_MakeAvailable(SFML)
 
 add_executable(main src/main.cpp)
 target_sources(
-  main PRIVATE src/Platform.cpp src/Ball.cpp
+  main PRIVATE src/Platform.cpp src/Ball.cpp src/Physics.cpp src/Block.cpp
 )
 target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_custom_command(TARGET main POST_BUILD
