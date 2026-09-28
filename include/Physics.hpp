@@ -8,11 +8,15 @@
 #include <memory>
 #include <vector>
 class Physics {
+public:
+  enum class CollisionType { BOUNCE, STOP };
+
 private:
   struct MovePacket {
-    std::unique_ptr<ICollide> *obj;
+    ICollide *obj;
     sf::Vector2f displacement;
     sf::Time moveTime;
+    CollisionType type;
   };
 
 private:
@@ -23,13 +27,18 @@ private:
 private:
   void tick();
   void InsertMovePacket(MovePacket packet);
+  bool CircVsRect(Collider *A);
+
+public:
+  std::vector<ICollide *> objectPool;
 
 public:
   Physics(sf::Time refreshRate);
-  void ComputeMove(std::unique_ptr<ICollide> *ptr, sf::Vector2f vec);
+  void ComputeMove(ICollide *ptr, sf::Vector2f vec, CollisionType type);
   void PhysicsStep(sf::Time step);
   class Debug {
-    void DrawCollider(std::unique_ptr<ICollide> *object_ptr,
-                      sf::RenderWindow &window, sf::Color color);
+  public:
+    static void DrawCollider(ICollide *object_ptr, sf::RenderWindow &window,
+                             sf::Color color);
   };
 };

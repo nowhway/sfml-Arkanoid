@@ -6,13 +6,12 @@
 
 Ball::Ball(const sf::Texture &texture, CircleCollider collider)
     : sprite(texture) {
-  this->collider = std::make_unique<CircleCollider>(collider.GetRadius(),
-                                                    collider.GetOffset());
+  this->collider = std::make_unique<CircleCollider>(collider);
 }
 
 void Ball::Update(float deltaTime) {}
 
-sf::Vector2f Ball::getPosition() { return sprite.getPosition(); }
-std::unique_ptr<Collider> *Ball::GetCollider() { return &collider; }
+sf::Vector2f Ball::GetPosition() { return sprite.getPosition(); }
+Collider *Ball::GetCollider() { return collider.get(); }
 
 void Ball::Draw(sf::RenderWindow &window) { window.draw(sprite); }

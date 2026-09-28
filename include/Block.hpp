@@ -3,13 +3,11 @@
 #include "Collider.hpp"
 #include "GameObject.hpp"
 #include "ICollide.hpp"
-#include <memory>
 class Block : GameObject, ICollide {
-private:
-  std::unique_ptr<Collider> collider;
 
 public:
   void Update(float deltaTime) override;
-  sf::Vector2f getPosition() override;
+  Collider *GetCollider() override;
+  sf::Vector2f GetPosition() override;
   void Draw(sf::RenderWindow &window) override;
-}
+};

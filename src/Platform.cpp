@@ -12,13 +12,15 @@ Platform::Platform(const sf::Texture &texture, float moveSpeed,
   sprite.setPosition({300, 350});
   sprite.scale(scaleVector);
   this->moveSpeed = moveSpeed;
-  this->collider = std::make_unique<RectangleCollider>(
-      rectCollider.GetBounds(), rectCollider.GetOffset());
+  rectCollider.SetBounds(static_cast<sf::Vector2f>(texture.getSize()) *
+                         scaleVector.x);
+
+  this->collider = std::make_unique<RectangleCollider>(rectCollider);
 }
 
-sf::Vector2f Platform::getPosition() { return sprite.getPosition(); }
+sf::Vector2f Platform::GetPosition() { return sprite.getPosition(); }
 
-std::unique_ptr<Collider> *Platform::GetCollider() { return &collider; }
+Collider *Platform::GetCollider() { return collider.get(); }
 
 void Platform::Update(float deltaTime) {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))

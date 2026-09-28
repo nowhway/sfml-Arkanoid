@@ -2,7 +2,10 @@
 #include "Collider.hpp"
 #include <memory>
 class ICollide {
+protected:
+  std::unique_ptr<Collider> collider;
+
 public:
   virtual ~ICollide() = default;
-  virtual std::unique_ptr<Collider>* GetCollider() = 0;
+  virtual Collider *GetCollider() = 0;
 };
